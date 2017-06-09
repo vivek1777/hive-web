@@ -21,7 +21,8 @@ public class Contact_Us {
 	public Contact_Us(WebDriver driver1){		
 		driver = driver1;
 	}
-
+	// This is my first commit
+	// This change will be reflect only after my commit
 	public void contactUs() throws InterruptedException
 	{
 		try{

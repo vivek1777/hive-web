@@ -1,3 +1,4 @@
+package Moderator_Web_App;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -13,14 +14,19 @@ import org.apache.bcel.classfile.Constant;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import Customer_Web_App.*;
 
 import com.fasterxml.jackson.core.JsonParseException;
 
@@ -40,6 +46,8 @@ public class Network_Capturing {
 	public BrowserMobProxyServer server;
 	//public HashMap<String, Integer> newmap = new HashMap<String, Integer>();
 	public static String msg1;
+	public static String cust_mail_msg;
+	public static String global_variable;
 	int count = 1;
 
 	@BeforeClass
@@ -49,9 +57,15 @@ public class Network_Capturing {
 		server.start();
 		int port = server.getPort();
 		Proxy proxy = ClientUtil.createSeleniumProxy(server);
-		DesiredCapabilities seleniumCapabilities = new DesiredCapabilities();
+		DesiredCapabilities seleniumCapabilities =  DesiredCapabilities.chrome();
 		seleniumCapabilities.setCapability(CapabilityType.PROXY, proxy);
 		driver = new ChromeDriver(seleniumCapabilities);
+		
+		ChromeOptions chromeOptions = new ChromeOptions();
+		chromeOptions.addArguments("--start-fullscreen");
+		//chromeOptions.addArguments("--kiosk");
+		driver = new ChromeDriver(chromeOptions);
+		
 		System.out.println("Port started:" + port);
 		msg1 = "Hi All,<br><br><h2 align='center'/>Web APPLICATION & API AUTOMATION REPORT</h2><div><div align='center'></div><br>";
 		msg1 += "<br><h3 align=\"center\"><i>Test Execution Details </i></h3>"
@@ -62,30 +76,63 @@ public class Network_Capturing {
 				+  "<th align='center' color='white' bgcolor='#F5DA81'>API Name</th>"
 				+ "<th align='center' color='white' bgcolor='#F5DA81'>STATUS CODE</th>"
 				+ "</tr>";
+		
+		cust_mail_msg = "Hi All,<br><br><h2 align='center'/>Customer Web APPLICATION AUTOMATION REPORT</h2><div><div align='center'></div><br>";
+		cust_mail_msg += "<br><h3 align=\"center\"><i>Test Execution Details </i></h3>"
+				+ "<table style=\"height:100%\" bordercolor='BLACK' border='1' cellpadding='7' cellspacing='0' align='center'>" + "<tr>"
+				+ "<th align='center' color='white' bgcolor='#F5DA81'>S.No.</th>"
+				+ "<th align='center' color='white' bgcolor='#F5DA81'>Operation Performed</th>"
+				+ "<th align='center' color='white' bgcolor='#F5DA81'>STATUS</th>"
+				+ "</tr>";
 	}
 
+//	@Parameters({ "web_app_type" })
+//	public void chooseApp_Portal(String web_app_type){
+//	if(web_app_type.equalsIgnoreCase("customer")){
+	
 	
 	@Test(priority = 1)
-	public void Signup_Test() throws InterruptedException, IOException {
-
+	@Parameters({ "web_app_type" })
+	public void operation1(String web_app_type) throws InterruptedException, IOException {
+		global_variable = web_app_type;
+		if(web_app_type.equalsIgnoreCase("moderator")){
 		server.newHar("experiment1.har");
 		operation_going_to_performed = "Signup / Register";
 		Signup go_signup = new Signup(driver);
 		go_signup.signup();
-		System.out.println("GOing to read HAR file for Signup");
+		
+		System.out.println("GOing to read HAR file for Moderator Signup");
 
 		Har har = server.getHar();
 		Thread.sleep(5000);
 		File harFile = new File("/Users/viveksingh/Documents/Animals/experiment1.har");
 		har.writeTo(harFile);
 		ReadHarFile("experiment1.har", operation_going_to_performed);
+		}
+		else
+		{
+			server.newHar("experiment1.har");
+			operation_going_to_performed = "Signup / Register";
+			Customer_Web_App.Customer_Signup go_signup = new Customer_Web_App.Customer_Signup(driver);
+			go_signup.signup();
+			
+			System.out.println("Going to read HAR file for Moderator Signup");
+			
+			Har har = server.getHar();
+			Thread.sleep(5000);
+			File harFile = new File("/Users/viveksingh/Documents/Animals/experiment1.har");
+			har.writeTo(harFile);
+			ReadHarFile("experiment1.har", operation_going_to_performed);
+			
+		}
 
 	}
 	
 	@Test(priority = 2)
-	public void Practice_task() throws IOException, InterruptedException
+	public void operation2() throws IOException, InterruptedException
 	{
-		 server.newHar("experiment6.har");
+		if(global_variable.equalsIgnoreCase("moderator")){
+			server.newHar("experiment6.har");
 			operation_going_to_performed = "Practice Task Completion";
 			Practice_Task practice_task_object = new Practice_Task(driver);
 			practice_task_object.practiceTaskCompletion();
@@ -96,12 +143,26 @@ public class Network_Capturing {
 			File harFile = new File("/Users/viveksingh/Documents/Animals/experiment6.har");
 			har.writeTo(harFile);
 			ReadHarFile("experiment6.har", operation_going_to_performed);
+		}
+		else
+		{
+			server.newHar("experiment6.har");
+			operation_going_to_performed = "Practice Task Completion";
+			Add_Project add_project = new Add_Project(driver);
+			add_project.addCategorizationProject();
+			System.out.println("Going to read HAR file for Moderator Signup");
+			Har har = server.getHar();
+			Thread.sleep(10000);
+			File harFile = new File("/Users/viveksingh/Documents/Animals/experiment6.har");
+			har.writeTo(harFile);
+			ReadHarFile("experiment6.har", operation_going_to_performed);
+		}
 	}
 	
 	@Test(priority = 3)
-	public void Profile() throws InterruptedException, IOException {
-
-		 server.newHar("experiment2.har");
+	public void opeartion3() throws InterruptedException, IOException {
+		if(global_variable.equalsIgnoreCase("moderator")){
+		server.newHar("experiment2.har");
 		operation_going_to_performed = "Profile Page";
 		Profile profile_object = new Profile(driver);
 		profile_object.profile();
@@ -112,12 +173,17 @@ public class Network_Capturing {
 		File harFile = new File("/Users/viveksingh/Documents/Animals/experiment2.har");
 		har.writeTo(harFile);
 		ReadHarFile("experiment2.har", operation_going_to_performed);
+		}
+		else
+		{
+			
+		}
 	}
 	
 	@Test(priority = 4)
-	public void Statistics() throws InterruptedException, IOException {
-
-		 server.newHar("experiment3.har");
+	public void operation4() throws InterruptedException, IOException {
+		if(global_variable.equalsIgnoreCase("moderator")){
+		server.newHar("experiment3.har");
 		operation_going_to_performed = "Stats";
 		Stats stats_object = new Stats(driver);
 		stats_object.statsStic();
@@ -128,12 +194,18 @@ public class Network_Capturing {
 		File harFile = new File("/Users/viveksingh/Documents/Animals/experiment3.har");
 		har.writeTo(harFile);
 		ReadHarFile("experiment3.har", operation_going_to_performed);
+		}
+		else
+		{
+			
+		}
 	}
 	
 	@Test(priority = 5)
-	public void Contact_Us_Test() throws InterruptedException, IOException {
+	public void opeartion5() throws InterruptedException, IOException {
 
-		 server.newHar("experiment4.har");
+		if(global_variable.equalsIgnoreCase("moderator")){
+		server.newHar("experiment4.har");
 		operation_going_to_performed = "Contact Us";
 		Contact_Us contactus = new Contact_Us(driver);
 		contactus.contactUs();
@@ -144,6 +216,11 @@ public class Network_Capturing {
 		File harFile = new File("/Users/viveksingh/Documents/Animals/experiment4.har");
 		har.writeTo(harFile);
 		ReadHarFile("experiment4.har", operation_going_to_performed);
+		}
+		else
+		{
+			
+		}
 	}
 	
 	
@@ -156,9 +233,10 @@ public class Network_Capturing {
 	
 	
 	
-	@Test(priority = 6)//6
-	public void Login_Test() throws InterruptedException, IOException {
+	@Test(priority = 6)
+	public void opeartion6() throws InterruptedException, IOException {
 
+		if(global_variable.equalsIgnoreCase("moderator")){
 		server.newHar("experiment7.har");
 		operation_going_to_performed = "Login";
 		Login go_login = new Login(driver);
@@ -171,12 +249,18 @@ public class Network_Capturing {
 		 Thread.sleep(2000);
 		 har.writeTo(harFile);
 		 ReadHarFile("experiment7.har",operation_going_to_performed );
+		}
+		else
+		{
+			
+		}
 	}
 	
-	@Test(priority = 7)//7
-	public void Moderation_task() throws InterruptedException, IOException
+	@Test(priority = 7)
+	public void opeartion7() throws InterruptedException, IOException
 	{
-		 server.newHar("experiment8.har");
+		if(global_variable.equalsIgnoreCase("moderator")){
+		 	server.newHar("experiment8.har");
 			operation_going_to_performed = "Moderation Task Completion";
 			Moderate_Task moderate_task_object = new Moderate_Task(driver);
 			moderate_task_object.moderatingTask();
@@ -187,7 +271,13 @@ public class Network_Capturing {
 			
 			har.writeTo(harFile);
 			ReadHarFile("experiment8.har", operation_going_to_performed);
+		}
+		else
+		{
+			
+		}
 	}
+
 
 	@AfterClass
 	public void shutdown() {
@@ -196,7 +286,7 @@ public class Network_Capturing {
 		Mailing_Report mail_report = new Mailing_Report();
 		msg1 += "</table>" + "</div>";
 		//System.out.println(msg1);
-		mail_report.sendReport(msg1);
+		//mail_report.sendReport(msg1);
 	}
 
 	public void ReadHarFile(String fileName, String operation_performed) {

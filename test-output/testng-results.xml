@@ -2,48 +2,55 @@
 <testng-results skipped="0" failed="0" ignored="0" total="7" passed="7">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="423724" started-at="2017-05-30T12:51:09Z" finished-at="2017-05-30T12:58:12Z">
+  <suite name="Default suite" duration-ms="77330" started-at="2017-06-12T15:14:26Z" finished-at="2017-06-12T15:15:43Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="423724" started-at="2017-05-30T12:51:09Z" finished-at="2017-05-30T12:58:12Z">
-      <class name="Network_Capturing">
-        <test-method status="PASS" signature="setup()[pri:0, instance:Network_Capturing@49b0b76]" name="setup" is-config="true" duration-ms="7653" started-at="2017-05-30T18:21:09Z" finished-at="2017-05-30T18:21:16Z">
+    <test name="operation1" duration-ms="77330" started-at="2017-06-12T15:14:26Z" finished-at="2017-06-12T15:15:43Z">
+      <class name="Moderator_Web_App.Network_Capturing">
+        <test-method status="PASS" signature="setup()[pri:0, instance:Moderator_Web_App.Network_Capturing@be64738]" name="setup" is-config="true" duration-ms="9246" started-at="2017-06-12T20:44:26Z" finished-at="2017-06-12T20:44:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method status="PASS" signature="Signup_Test()[pri:1, instance:Network_Capturing@49b0b76]" name="Signup_Test" duration-ms="60540" started-at="2017-05-30T18:21:16Z" finished-at="2017-05-30T18:22:17Z">
+        <test-method status="PASS" signature="operation1(java.lang.String)[pri:1, instance:Moderator_Web_App.Network_Capturing@be64738]" name="operation1" duration-ms="29903" started-at="2017-06-12T20:44:35Z" finished-at="2017-06-12T20:45:05Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[customer]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Signup_Test -->
-        <test-method status="PASS" signature="Practice_task()[pri:2, instance:Network_Capturing@49b0b76]" name="Practice_task" duration-ms="225300" started-at="2017-05-30T18:22:17Z" finished-at="2017-05-30T18:26:02Z">
+        </test-method> <!-- operation1 -->
+        <test-method status="PASS" signature="operation2()[pri:2, instance:Moderator_Web_App.Network_Capturing@be64738]" name="operation2" duration-ms="35655" started-at="2017-06-12T20:45:05Z" finished-at="2017-06-12T20:45:41Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Practice_task -->
-        <test-method status="PASS" signature="Profile()[pri:3, instance:Network_Capturing@49b0b76]" name="Profile" duration-ms="39926" started-at="2017-05-30T18:26:02Z" finished-at="2017-05-30T18:26:42Z">
+        </test-method> <!-- operation2 -->
+        <test-method status="PASS" signature="opeartion3()[pri:3, instance:Moderator_Web_App.Network_Capturing@be64738]" name="opeartion3" duration-ms="2" started-at="2017-06-12T20:45:41Z" finished-at="2017-06-12T20:45:41Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Profile -->
-        <test-method status="PASS" signature="Statistics()[pri:4, instance:Network_Capturing@49b0b76]" name="Statistics" duration-ms="9284" started-at="2017-05-30T18:26:42Z" finished-at="2017-05-30T18:26:51Z">
+        </test-method> <!-- opeartion3 -->
+        <test-method status="PASS" signature="operation4()[pri:4, instance:Moderator_Web_App.Network_Capturing@be64738]" name="operation4" duration-ms="2" started-at="2017-06-12T20:45:41Z" finished-at="2017-06-12T20:45:41Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Statistics -->
-        <test-method status="PASS" signature="Contact_Us_Test()[pri:5, instance:Network_Capturing@49b0b76]" name="Contact_Us_Test" duration-ms="15920" started-at="2017-05-30T18:26:51Z" finished-at="2017-05-30T18:27:07Z">
+        </test-method> <!-- operation4 -->
+        <test-method status="PASS" signature="opeartion5()[pri:5, instance:Moderator_Web_App.Network_Capturing@be64738]" name="opeartion5" duration-ms="1" started-at="2017-06-12T20:45:41Z" finished-at="2017-06-12T20:45:41Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Contact_Us_Test -->
-        <test-method status="PASS" signature="Login_Test()[pri:6, instance:Network_Capturing@49b0b76]" name="Login_Test" duration-ms="17931" started-at="2017-05-30T18:27:07Z" finished-at="2017-05-30T18:27:25Z">
+        </test-method> <!-- opeartion5 -->
+        <test-method status="PASS" signature="opeartion6()[pri:6, instance:Moderator_Web_App.Network_Capturing@be64738]" name="opeartion6" duration-ms="1" started-at="2017-06-12T20:45:41Z" finished-at="2017-06-12T20:45:41Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Login_Test -->
-        <test-method status="PASS" signature="Moderation_task()[pri:7, instance:Network_Capturing@49b0b76]" name="Moderation_task" duration-ms="30546" started-at="2017-05-30T18:27:25Z" finished-at="2017-05-30T18:27:56Z">
+        </test-method> <!-- opeartion6 -->
+        <test-method status="PASS" signature="opeartion7()[pri:7, instance:Moderator_Web_App.Network_Capturing@be64738]" name="opeartion7" duration-ms="1" started-at="2017-06-12T20:45:41Z" finished-at="2017-06-12T20:45:41Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Moderation_task -->
-        <test-method status="PASS" signature="shutdown()[pri:0, instance:Network_Capturing@49b0b76]" name="shutdown" is-config="true" duration-ms="16543" started-at="2017-05-30T18:27:56Z" finished-at="2017-05-30T18:28:12Z">
+        </test-method> <!-- opeartion7 -->
+        <test-method status="PASS" signature="shutdown()[pri:0, instance:Moderator_Web_App.Network_Capturing@be64738]" name="shutdown" is-config="true" duration-ms="2415" started-at="2017-06-12T20:45:41Z" finished-at="2017-06-12T20:45:43Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shutdown -->
-      </class> <!-- Network_Capturing -->
-    </test> <!-- Default test -->
+      </class> <!-- Moderator_Web_App.Network_Capturing -->
+    </test> <!-- operation1 -->
   </suite> <!-- Default suite -->
 </testng-results>

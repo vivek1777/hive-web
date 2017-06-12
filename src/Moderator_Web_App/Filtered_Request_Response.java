@@ -1,3 +1,4 @@
+package Moderator_Web_App;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.BaseEncoding;
 

@@ -29,13 +29,6 @@ public class Signup {
 	public Signup(WebDriver driver1){		
 		driver = driver1;
 	}
-	public Signup(){		
-		
-	}
-	
-	
-	
-	
 	
 	public void signup() throws InterruptedException
 	{	
@@ -43,8 +36,8 @@ public class Signup {
 		//driver.manage().window().maximize();
 		driver.get("https://hivemicro.com");
 		WebElement full_name_text_field;
-		
-		WebDriverWait wait = new WebDriverWait(driver, 40);
+		Thread.sleep(10000);
+		WebDriverWait wait = new WebDriverWait(driver, 600);
 		WebElement signup_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/header/div[2]/nav/div/a")));
 		signup_button.click();
 		
@@ -81,11 +74,23 @@ public class Signup {
 		
 		Thread.sleep(5000);
 		
-		if(isElementPresentBylinkText("Skip")){
+		while(true)
+		{
+			try{
 			WebElement skip_paypal_detail_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Skip")));
 			skip_paypal_detail_button.click();
-			Thread.sleep(10000);
+			break;
+			}catch(Exception e)
+			{
+				System.out.println("Skip button of payemnt page after signup is not found");
+			}
 		}
+		
+//		if(isElementPresentBylinkText("Skip")){
+//			WebElement skip_paypal_detail_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Skip")));
+//			skip_paypal_detail_button.click();
+//			Thread.sleep(10000);
+//		}
 		
 		//Thread.sleep(7000);
 		
@@ -95,7 +100,7 @@ public class Signup {
 //		signout_link.click();
 		System.out.println("=======================================================================================================================================================================================");
 		
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 		//driver.close();
 		}
 		catch(Exception e)

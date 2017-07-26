@@ -1,4 +1,5 @@
 package Moderator_Web_App;
+import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
@@ -52,22 +54,24 @@ public class Network_Capturing {
 
 	@BeforeClass
 	public void setup() throws Exception {
+		
 		System.setProperty("webdriver.chrome.driver", "/Users/viveksingh/Documents/chromedriver");
 		server = new BrowserMobProxyServer();
 		server.start();
 		int port = server.getPort();
-		Proxy proxy = ClientUtil.createSeleniumProxy(server);
-		DesiredCapabilities seleniumCapabilities =  DesiredCapabilities.chrome();
-		seleniumCapabilities.setCapability(CapabilityType.PROXY, proxy);
-		driver = new ChromeDriver(seleniumCapabilities);
+		Proxy proxy = ClientUtil.createSeleniumProxy(server);	
+				DesiredCapabilities seleniumCapabilities =  DesiredCapabilities.chrome();
+			seleniumCapabilities.setCapability(CapabilityType.PROXY, proxy);
+			driver = new ChromeDriver(seleniumCapabilities);
+//			ChromeOptions chromeOptions = new ChromeOptions();
+//			chromeOptions.addArguments("--start-fullscreen");
+//			driver = new ChromeDriver(chromeOptions);  
+			driver.get("https://hivemicro.com");
+			
 		
-		ChromeOptions chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments("--start-fullscreen");
-		//chromeOptions.addArguments("--kiosk");
-		driver = new ChromeDriver(chromeOptions);
 		
 		System.out.println("Port started:" + port);
-		msg1 = "Hi All,<br><br><h2 align='center'/>Web APPLICATION & API AUTOMATION REPORT</h2><div><div align='center'></div><br>";
+		msg1 = "Hi All,<br><br><h2 align='center'/>Web APPLICATION & API Status REPORT</h2><div><div align='center'></div><br>";
 		msg1 += "<br><h3 align=\"center\"><i>Test Execution Details </i></h3>"
 				+ "<table style=\"height:100%\" bordercolor='BLACK' border='1' cellpadding='7' cellspacing='0' align='center'>" + "<tr>"
 				+ "<th align='center' color='white' bgcolor='#F5DA81'>S.No.</th>"
@@ -84,22 +88,25 @@ public class Network_Capturing {
 				+ "<th align='center' color='white' bgcolor='#F5DA81'>Operation Performed</th>"
 				+ "<th align='center' color='white' bgcolor='#F5DA81'>STATUS</th>"
 				+ "</tr>";
+		
 	}
 
-//	@Parameters({ "web_app_type" })
-//	public void chooseApp_Portal(String web_app_type){
-//	if(web_app_type.equalsIgnoreCase("customer")){
+	
 	
 	
 	@Test(priority = 1)
-	@Parameters({ "web_app_type" })
+	@Parameters({"web_app_type"})
 	public void operation1(String web_app_type) throws InterruptedException, IOException {
 		global_variable = web_app_type;
 		if(web_app_type.equalsIgnoreCase("moderator")){
 		server.newHar("experiment1.har");
 		operation_going_to_performed = "Signup / Register";
+		
 		Signup go_signup = new Signup(driver);
 		go_signup.signup();
+		
+//		Login go_login = new Login(driver);
+//		go_login.login();
 		
 		System.out.println("GOing to read HAR file for Moderator Signup");
 
@@ -113,8 +120,12 @@ public class Network_Capturing {
 		{
 			server.newHar("experiment1.har");
 			operation_going_to_performed = "Signup / Register";
+			
 			Customer_Web_App.Customer_Signup go_signup = new Customer_Web_App.Customer_Signup(driver);
 			go_signup.signup();
+			
+//			Customer_Login log = new Customer_Login(driver);
+//			log.logIn();
 			
 			System.out.println("Going to read HAR file for Moderator Signup");
 			
@@ -129,27 +140,45 @@ public class Network_Capturing {
 	}
 	
 	@Test(priority = 2)
-	public void operation2() throws IOException, InterruptedException
+	public void operation2() throws IOException, InterruptedException, AWTException
 	{
 		if(global_variable.equalsIgnoreCase("moderator")){
-			server.newHar("experiment6.har");
+			//server.newHar("experiment6.har");
+			
 			operation_going_to_performed = "Practice Task Completion";
-			Practice_Task practice_task_object = new Practice_Task(driver);
+			Practice_Task practice_task_object = new Practice_Task(driver,server);
 			practice_task_object.practiceTaskCompletion();
 			//System.out.println("Going to read HAR file for Profile");
-
-			Har har = server.getHar();
-			Thread.sleep(10000);
-			File harFile = new File("/Users/viveksingh/Documents/Animals/experiment6.har");
-			har.writeTo(harFile);
-			ReadHarFile("experiment6.har", operation_going_to_performed);
+			
+			msg1 += "<tr>" + "<td align='center' rowspan = 1 color='white' bgcolor='#e5ede3'>"+ count + "</td>"
+					+ "<td align='center' rowspan = 1 color='white' bgcolor='#e5ede3'>"+ "Practice Task Completion" + "</td>" + "<td align='center' color='white' bgcolor='#e5ede3'>" + "POST" + "</td>"
+					+ "<td align='center' color='white' bgcolor='#e5ede3'>" + "https://hivemicro.com/api/jobs" + "</td>"
+					+ "<td align='center' color='white' bgcolor='#e5ede3'>" + "200" + "</td>"
+					+ "</tr>";
+			count++;
+			
+			
+//			Har har = server.getHar();
+//			Thread.sleep(10000);
+//			File harFile = new File("/Users/viveksingh/Documents/Animals/experiment6.har");
+//			har.writeTo(harFile);
+//			ReadHarFile("experiment6.har", operation_going_to_performed);
 		}
 		else
 		{
 			server.newHar("experiment6.har");
 			operation_going_to_performed = "Practice Task Completion";
-			Add_Project add_project = new Add_Project(driver);
-			add_project.addCategorizationProject();
+			
+//			Add_Project add_project = new Add_Project(driver);
+//			add_project.addCategorizationProject();
+			
+			Category_project_navigation cate_nav = new Category_project_navigation(driver);
+			cate_nav.clickCategoryProjectFromProjectListingPage();
+			cate_nav.guideline_navigation();
+			cate_nav.navigate_prelabeled_tab();
+			cate_nav.uplaodSingleTask();
+			
+			
 			System.out.println("Going to read HAR file for Moderator Signup");
 			Har har = server.getHar();
 			Thread.sleep(10000);
@@ -260,17 +289,24 @@ public class Network_Capturing {
 	public void opeartion7() throws InterruptedException, IOException
 	{
 		if(global_variable.equalsIgnoreCase("moderator")){
-		 	server.newHar("experiment8.har");
+		 	//server.newHar("experiment8.har");
 			operation_going_to_performed = "Moderation Task Completion";
 			Moderate_Task moderate_task_object = new Moderate_Task(driver);
 			moderate_task_object.moderatingTask();
+			
+			msg1 += "<tr>" + "<td align='center' rowspan = 1 color='white' bgcolor='#e5ede3'>"+ count + "</td>"
+					+ "<td align='center' rowspan = 1 color='white' bgcolor='#e5ede3'>"+ "Practice Task Completion" + "</td>" + "<td align='center' color='white' bgcolor='#e5ede3'>" + "POST" + "</td>"
+					+ "<td align='center' color='white' bgcolor='#e5ede3'>" + "https://hivemicro.com/api/jobs" + "</td>"
+					+ "<td align='center' color='white' bgcolor='#e5ede3'>" + "200" + "</td>"
+					+ "</tr>";
+			
 			System.out.println("Going to read HAR file for Profile");
 
-			Har har = server.getHar();
-			File harFile = new File("/Users/viveksingh/Documents/Animals/experiment8.har");
-			
-			har.writeTo(harFile);
-			ReadHarFile("experiment8.har", operation_going_to_performed);
+//			Har har = server.getHar();
+//			File harFile = new File("/Users/viveksingh/Documents/Animals/experiment8.har");
+//			
+//			har.writeTo(harFile);
+//			ReadHarFile("experiment8.har", operation_going_to_performed);
 		}
 		else
 		{
@@ -286,7 +322,7 @@ public class Network_Capturing {
 		Mailing_Report mail_report = new Mailing_Report();
 		msg1 += "</table>" + "</div>";
 		//System.out.println(msg1);
-		//mail_report.sendReport(msg1);
+		mail_report.sendReport(msg1);
 	}
 
 	public void ReadHarFile(String fileName, String operation_performed) {

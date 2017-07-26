@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Default suite">
-<parameter name="web_app_type" value="customer"/>
+<parameter name="web_app_type" value="moderator"/>
   <test verbose="2" name="operation1">
     <classes>
       <class name="Moderator_Web_App.Network_Capturing"/>

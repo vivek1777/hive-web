@@ -1,5 +1,10 @@
 package Customer_Web_App;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.Random;
 
 import org.openqa.selenium.By;
@@ -18,6 +23,8 @@ import Moderator_Web_App.Network_Capturing;
 public class Customer_Signup {
 	
 	public WebDriver driver;
+	FileInputStream fileInput = null;
+	Properties prop = new Properties();
 	static Random rand = new Random();
 	static int  n = rand.nextInt(50) + 1;
 	static int  n1 = rand.nextInt(50) + 1;
@@ -25,19 +32,35 @@ public class Customer_Signup {
 	
 	public Customer_Signup(WebDriver driver1){		
 		driver = driver1;
+		File file = new File("/Users/viveksingh/Documents/workspace/Practice_Enterprise_Leve/src/signup.properties");
+		 
+		
+		driver1=driver;
+		try {
+		
+			fileInput = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			prop.load(fileInput);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void signup() throws InterruptedException
 	{
-		driver.get("https://thehive.ai");
+		driver.get("https://thehive.ai/");
 		
 		
 		
 		Thread.sleep(10000);
-		SoftAssert softAssert = new SoftAssert();
+		//SoftAssert softAssert = new SoftAssert();
 		try{
-		WebDriverWait wait = new WebDriverWait(driver, 50);
-		WebElement signup_button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div[1]/div[1]/header/div/div/nav/div[2]/a[2]/button/span[1]")));
+		WebDriverWait wait = new WebDriverWait(driver, 500);
+		WebElement signup_button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("signup_button_welcome_page"))));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(signup_button).click().perform();
 		
@@ -48,26 +71,29 @@ public class Customer_Signup {
 		
 		WebElement email_text_field = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email")));
 		email_text_field.sendKeys(global_email);
+		System.out.println(global_email);
 		
 		WebElement password_text_field = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("password")));
 		password_text_field.sendKeys("kiwikiwi");
 		
-		WebElement submit_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div[1]/div[2]/div[2]/div/div/div[1]/form/div/div[7]/button")));
-		submit_button.click();
+		WebElement submit_button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("signup_form_submit_button"))));
+		Actions act1 = new Actions(driver);
+		act1.moveToElement(submit_button).click().perform();
+		//submit_button.click();
 		
-		WebDriverWait wait1 = new WebDriverWait(driver, 50);
-		WebElement title_after_signu = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div[2]/div[2]/div/div/div/h1")));
-		title_after_signu.getText();
+//		WebDriverWait wait1 = new WebDriverWait(driver, 50);
+//		WebElement title_after_signu = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div[2]/div[2]/div/div/div/h1")));
+//		title_after_signu.getText();
 		
-		softAssert.assertEquals("title_after_signu.getText()", "My Project");
+		//softAssert.assertEquals("title_after_signu.getText()", "My Project");
 		
-		if(title_after_signu.getText().equalsIgnoreCase("My Projects"))
-		    {
-				Network_Capturing.cust_mail_msg += "<tr>" + "<td align='center'  color='white' bgcolor='#e5ede3'>" + 1
-						+ "</td>" + "<td align='center' color='white' bgcolor='#e5ede3'>" + "Sign-Up" + "</td>"
-						+ "<td align='center' color='white' bgcolor='#e5ede3'>" + "Pass" + "</td>";
-				Network_Capturing.cust_mail_msg += "</tr>";
-			}
+//		if(title_after_signu.getText().equalsIgnoreCase("My Projects"))
+//		    {
+//				Network_Capturing.cust_mail_msg += "<tr>" + "<td align='center'  color='white' bgcolor='#e5ede3'>" + 1
+//						+ "</td>" + "<td align='center' color='white' bgcolor='#e5ede3'>" + "Sign-Up" + "</td>"
+//						+ "<td align='center' color='white' bgcolor='#e5ede3'>" + "Pass" + "</td>";
+//				Network_Capturing.cust_mail_msg += "</tr>";
+//			}
 		
 		}
 		catch(Exception e )

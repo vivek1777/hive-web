@@ -23,9 +23,7 @@ public class Moderate_Task {
 	
 public WebDriver driver;
 	
-	
-	
-	public Moderate_Task(WebDriver driver1){		
+	public Moderate_Task(WebDriver driver1){
 		driver = driver1;
 	}
 	
@@ -51,8 +49,8 @@ public WebDriver driver;
 			if(isElementPresentByClassName("_2sQiieIo03qrJhLGS-Lfky _3xDhhLog2fS9PQtPXrpbHO")) // if toggle is enabled
 			{
 				
-				WebElement start_working_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("_3VKG6gpwuvcgvDd94G4m_U")));
-				start_working_button.click(); // click on start working button
+				WebElement first_start_working_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("_3VKG6gpwuvcgvDd94G4m_U")));
+				first_start_working_button.click(); // click on start working button
 				//driver.findElement(By.className("_3VKG6gpwuvcgvDd94G4m_U"));// click on start working button
 				Thread.sleep(7000);
 				if(isElementPresentByClassName("_1xMA1J_25JShnn1OrgerRz"))// if start working button of final page appears
@@ -62,13 +60,13 @@ public WebDriver driver;
 				}
 				int attempt_counter =0;
 				
-				while(isElementPresentByXpath("html/body/div[2]/div/div[2]/div/div/div[1]/button/span") && attempt_counter<5) // id no more task appears
+				while(isElementPresentByXpath("html/body/div[2]/div/div[2]/div/div/div[1]/button/span") && attempt_counter<5) // if no more task appears
 				{
 					driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div/div/div[1]/button/span")).click(); // clicking cross button of no more task
 					Thread.sleep(2000);
 					driver.findElement(By.className("_1xMA1J_25JShnn1OrgerRz")).click();  // again click on Start working button
 				}
-			Thread.sleep(5000);
+				Thread.sleep(5000);
 					int task_counter=0;
 					while (task_counter < 5) {
 						if (task_counter % 2 == 0) {
@@ -171,14 +169,6 @@ public WebDriver driver;
 				i--;
 			}
 			
-			//_2H7ucOUfSIUH-Bpg6wzhzt no more task alert class
-			///html/body/div/div/main/div/div[1]/div/div/div[1]/button   xpath for start job button
-			///html/body/div/div/main/div/div[1]/div[2]/div/div[1]/button    xpath for end job button
-			//_3xDhhLog2fS9PQtPXrpbHO     class for toggle in disabled state
-			//_2sQiieIo03qrJhLGS-Lfky _3xDhhLog2fS9PQtPXrpbHO    class of toggle in enable state
-			///html/body/div[2]/div/div[2]/div/div/div[1]/button/span   xpath for cross button no more task pop-up
-			// _1xMA1J_25JShnn1OrgerRz    start working button of final page
-			///html/body/div/div/main/div/div[2]/div/table/tbody/tr[1]/td[5]/div/div   xpath for enabled toggle
 		}
 		catch(Exception e)
 		{

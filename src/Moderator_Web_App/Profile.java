@@ -28,7 +28,7 @@ public class Profile {
 		{
 			WebDriverWait wait = new WebDriverWait(driver, 50);
 			WebElement profile_page_link = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-					.xpath("/html/body/div/div/header/div[2]/nav/a[5]")));
+					.xpath("/html/body/div/div/header/div[2]/nav/a[6]")));
 			profile_page_link.click();
 			
 			Thread.sleep(2000);
@@ -38,6 +38,7 @@ public class Profile {
 
 			WebElement profile_update_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath("/html/body/div/div/main/div/div[2]/div[1]/div/div/input")));
+							
 			profile_update_button.click();
 			Thread.sleep(8000);
 			
@@ -52,7 +53,8 @@ public class Profile {
 			Thread.sleep(5000);
 			try{
 			WebElement paypal_email = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div/div/main/div/div[2]/div[2]/div/form/fieldset[3]/input")));
-			paypal_email.sendKeys("vineet1777@yahoo.com");
+																									
+				paypal_email.sendKeys("vineet1777@yahoo.com");
 			System.out.println("Entered  email");
 			}
 			catch(Exception e)
@@ -111,7 +113,7 @@ public class Profile {
 			
 			System.out.println("=======================================================================================================================================================================================");
 			
-			Thread.sleep(10000);
+			Thread.sleep(5000);
 			
 			
 		} catch (Exception e) {

@@ -17,26 +17,24 @@ public class Login {
 	
 	public WebDriver driver;
 	
-	
-	
 	public Login(WebDriver driver1){		
 		driver = driver1;
 	}
 	
 	
-	
-	
-	
 	public void login() throws InterruptedException
 	{	
 		try{
-		//driver.manage().window().maximize();
 		//driver.get("https://hivemicro.com");
 		
 		WebDriverWait wait = new WebDriverWait(driver, 30);
-		
+		try{
 		WebElement signout_link = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/header/div[2]/nav/button")));
 		signout_link.click();
+		}catch(Exception e)
+		{
+			System.out.println("signout link not found");
+		}
 		
 		WebElement log_in_link = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Log In")));
 		log_in_link.click();
@@ -69,7 +67,6 @@ public class Login {
 		
 		Thread.sleep(10000);
 		System.out.println("=======================================================================================================================================================================================");
-		//driver.close();
 		}
 		catch(Exception e)
 		{

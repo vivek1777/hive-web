@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import net.lightbody.bmp.core.har.Har;
 
+import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
@@ -22,7 +23,7 @@ public class Signup {
 	static Random rand = new Random();
 	static int  n = rand.nextInt(50) + 1;
 	static int  n1 = rand.nextInt(50) + 1;
-	public static String email = "testqa+"+n+n1+"@kiwi.qa";
+	public static String email = "testqa+"+1+n+n1+"@kiwi.qa";
 	
 	
 	
@@ -66,11 +67,35 @@ public class Signup {
 		WebElement confirm_password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("confirm_password")));
 		confirm_password.sendKeys("kiwikiwi");
 		
+		try{
 		driver.findElement(By.id("legal-verification")).click();
 		driver.findElement(By.id("age-verification")).click();
+		}catch(Exception e)
+		{
+			System.out.println("legal-verificatio or age-verification is not clickable");
+		}
 		
 		WebElement signup_submit_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/main/div/div[2]/div/div[3]/input")));
 		signup_submit_button.click();
+		Thread.sleep(5000);
+		
+		try{
+			driver.findElement(By.xpath("/html/body/div/div/main/div/div[2]/div/form/fieldset[2]/div"));
+			 int  n3 = rand.nextInt(50) + 1;
+			 int  n4 = rand.nextInt(50) + 1;
+			 String email_new = "testqa+"+n+n1+"@kiwi.qa";
+			 email_of_user.sendKeys(email_new);
+				System.out.println(email_new);
+				WebElement signup_submit_button_new = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/main/div/div[2]/div/div[3]/input")));
+				signup_submit_button_new.click();
+				Thread.sleep(5000);
+			
+		}
+		catch(Exception e3)
+		{
+			System.out.println("given email worked successfully.");
+		}
+		
 		
 		Thread.sleep(5000);
 		
@@ -86,25 +111,73 @@ public class Signup {
 			}
 		}
 		
-//		if(isElementPresentBylinkText("Skip")){
-//			WebElement skip_paypal_detail_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Skip")));
-//			skip_paypal_detail_button.click();
-//			Thread.sleep(10000);
-//		}
-		
-		//Thread.sleep(7000);
-		
-		//WebElement signout_link = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("headerButton")));
-		//WebElement signout_link = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/header/div[2]/nav/button")));
-//		WebElement signout_link = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div/div/header/div[2]/nav/button")));
-//		signout_link.click();
+
 		System.out.println("=======================================================================================================================================================================================");
 		
 		//Thread.sleep(10000);
 		//driver.close();
+		Thread.sleep(5000);
+		if(driver.findElement(By.xpath("/html/body/div/div/header/div[2]/nav/a[6]")).isDisplayed()){
+		Network_Capturing.mod_mail_msg += "<tr>" +
+				 "<td align='center'  color='white' bgcolor='#e5ede3'>"+Network_Capturing.var_for_report_counter+"</td>"
+				 + "<td align='left' color='white' bgcolor='#e5ede3'>" +
+				 "User is able to sign up successfully on Customer Portal." + "</td>"
+				 + "<td align='center' color='white' bgcolor='#e5ede3'>" +
+				 "Pass" + "</td>";
+				 Network_Capturing.mod_mail_msg += "</tr>";
+				 Network_Capturing.var_for_report_counter++;
+		}
+		else
+		{
+			Network_Capturing.mod_mail_msg += "<tr>" +
+					 "<td align='center'  color='white' bgcolor='#e5ede3'>"+Network_Capturing.var_for_report_counter+"</td>"
+					 + "<td align='left' color='white' bgcolor='#e5ede3'>" +
+					 "User is able to sign up successfully on Customer Portal." + "</td>"
+					 + "<td align='center' color='white' bgcolor='#FDE2DC'>" +
+					 "Fail" + "</td>";
+					 Network_Capturing.mod_mail_msg += "</tr>";
+					 Network_Capturing.var_for_report_counter++;
+		}
+		
+		Thread.sleep(5000);
+		//FOr All apply button appearing test case
+		List<WebElement> number_of_apply_link = driver.findElements(By.linkText("Apply"));
+		List<WebElement> number_of_rows = driver.findElements(By.tagName("tr"));
+		if((number_of_rows.size()-1) == number_of_apply_link.size())
+		{
+			Network_Capturing.mod_mail_msg += "<tr>" +
+					 "<td align='center'  color='white' bgcolor='#e5ede3'>"+Network_Capturing.var_for_report_counter+"</td>"
+					 + "<td align='left' color='white' bgcolor='#e5ede3'>" +
+					 "New User can see All Jobs status as 'Apply' on Feature and General Jobs Screen" + "</td>"
+					 + "<td align='center' color='white' bgcolor='#e5ede3'>" +
+					 "Pass" + "</td>";
+					 Network_Capturing.mod_mail_msg += "</tr>";
+					 Network_Capturing.var_for_report_counter++;
+		}
+		else
+		{
+			Network_Capturing.mod_mail_msg += "<tr>" +
+					 "<td align='center'  color='white' bgcolor='#e5ede3'>"+Network_Capturing.var_for_report_counter+"</td>"
+					 + "<td align='left' color='white' bgcolor='#e5ede3'>" +
+					 "New User can see All Jobs status as 'Apply' on Feature and General Jobs Screen" + "</td>"
+					 + "<td align='center' color='white' bgcolor='#FDE2DC'>" +
+					 "Fail" + "</td>";
+					 Network_Capturing.mod_mail_msg += "</tr>";
+					 Network_Capturing.var_for_report_counter++;
+			
+		}
+		
 		}
 		catch(Exception e)
 		{
+			Network_Capturing.mod_mail_msg += "<tr>" +
+					 "<td align='center'  color='white' bgcolor='#e5ede3'>"+Network_Capturing.var_for_report_counter+"</td>"
+					 + "<td align='left' color='white' bgcolor='#e5ede3'>" +
+					 "User is able to sign up successfully on Customer Portal." + "</td>"
+					 + "<td align='center' color='white' bgcolor='#FDE2DC'>" +
+					 "Fail" + "</td>";
+					 Network_Capturing.mod_mail_msg += "</tr>";
+					 Network_Capturing.var_for_report_counter++;
 			e.printStackTrace();
 		}
 	}

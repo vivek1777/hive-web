@@ -26,10 +26,7 @@ public class Mailing_Report {
 	public void sendReport(String msg1)
  {
 		System.out.println("Finally! Going to send email");
-		String host = "smtp.gmail.com";
-		String user = "";
-		String password = "";
-		String from = "";
+		
 		String subject = "Hive Automation Report";
 		boolean sessionDebug = false;
 
@@ -65,8 +62,8 @@ public class Mailing_Report {
 			multipart.addBodyPart(messageBodyPart);
 			message.setContent(multipart);
 
-			String recipi = "vivek.singh@kiwi.qa ,mukul.bhaisora@kiwi.qa,surakhshit.pawanotra@kiwi.qa,nick@kiwi.qa";
-
+			//String recipi = "vivek.singh@kiwi.qa ,mukul.bhaisora@kiwi.qa,surakhshit.pawanotra@kiwi.qa";
+			String recipi = "vivek.singh@kiwi.qa";
 			String[] recipientList = recipi.split(",");
 			InternetAddress[] recipientAddress = new InternetAddress[recipientList.length];
 			int counter = 0;

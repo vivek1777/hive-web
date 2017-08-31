@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="7" passed="7">
+<testng-results skipped="0" failed="0" ignored="0" total="8" passed="8">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="450624" started-at="2017-07-25T17:15:36Z" finished-at="2017-07-25T17:23:07Z">
+  <suite name="Default suite" duration-ms="510537" started-at="2017-08-31T05:30:09Z" finished-at="2017-08-31T05:38:39Z">
     <groups>
     </groups>
-    <test name="operation1" duration-ms="450624" started-at="2017-07-25T17:15:36Z" finished-at="2017-07-25T17:23:07Z">
+    <test name="operation1" duration-ms="510537" started-at="2017-08-31T05:30:09Z" finished-at="2017-08-31T05:38:39Z">
       <class name="Moderator_Web_App.Network_Capturing">
-        <test-method status="PASS" signature="setup()[pri:0, instance:Moderator_Web_App.Network_Capturing@be64738]" name="setup" is-config="true" duration-ms="15372" started-at="2017-07-25T22:45:36Z" finished-at="2017-07-25T22:45:51Z">
+        <test-method status="PASS" signature="setup()[pri:0, instance:Moderator_Web_App.Network_Capturing@c038203]" name="setup" is-config="true" duration-ms="16152" started-at="2017-08-31T11:00:09Z" finished-at="2017-08-31T11:00:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method status="PASS" signature="operation1(java.lang.String)[pri:1, instance:Moderator_Web_App.Network_Capturing@be64738]" name="operation1" duration-ms="29041" started-at="2017-07-25T22:45:51Z" finished-at="2017-07-25T22:46:20Z">
+        <test-method status="PASS" signature="operation1(java.lang.String)[pri:1, instance:Moderator_Web_App.Network_Capturing@c038203]" name="operation1" duration-ms="41726" started-at="2017-08-31T11:00:25Z" finished-at="2017-08-31T11:01:07Z">
           <params>
             <param index="0">
               <value>
@@ -22,31 +22,42 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- operation1 -->
-        <test-method status="PASS" signature="operation2()[pri:2, instance:Moderator_Web_App.Network_Capturing@be64738]" name="operation2" duration-ms="229913" started-at="2017-07-25T22:46:20Z" finished-at="2017-07-25T22:50:10Z">
+        <test-method status="PASS" signature="operation2()[pri:2, instance:Moderator_Web_App.Network_Capturing@c038203]" name="operation2" duration-ms="209906" started-at="2017-08-31T11:01:07Z" finished-at="2017-08-31T11:04:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- operation2 -->
-        <test-method status="PASS" signature="opeartion3()[pri:3, instance:Moderator_Web_App.Network_Capturing@be64738]" name="opeartion3" duration-ms="34575" started-at="2017-07-25T22:50:10Z" finished-at="2017-07-25T22:50:45Z">
+        <test-method status="PASS" signature="opeartion3()[pri:3, instance:Moderator_Web_App.Network_Capturing@c038203]" name="opeartion3" duration-ms="39555" started-at="2017-08-31T11:04:37Z" finished-at="2017-08-31T11:05:16Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- opeartion3 -->
-        <test-method status="PASS" signature="operation4()[pri:4, instance:Moderator_Web_App.Network_Capturing@be64738]" name="operation4" duration-ms="9282" started-at="2017-07-25T22:50:45Z" finished-at="2017-07-25T22:50:54Z">
+        <test-method status="PASS" signature="operation4()[pri:4, instance:Moderator_Web_App.Network_Capturing@c038203]" name="operation4" duration-ms="12269" started-at="2017-08-31T11:05:16Z" finished-at="2017-08-31T11:05:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- operation4 -->
-        <test-method status="PASS" signature="opeartion5()[pri:5, instance:Moderator_Web_App.Network_Capturing@be64738]" name="opeartion5" duration-ms="15890" started-at="2017-07-25T22:50:54Z" finished-at="2017-07-25T22:51:10Z">
+        <test-method status="PASS" signature="opeartion5()[pri:5, instance:Moderator_Web_App.Network_Capturing@c038203]" name="opeartion5" duration-ms="26510" started-at="2017-08-31T11:05:28Z" finished-at="2017-08-31T11:05:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- opeartion5 -->
-        <test-method status="PASS" signature="opeartion6()[pri:6, instance:Moderator_Web_App.Network_Capturing@be64738]" name="opeartion6" duration-ms="17834" started-at="2017-07-25T22:51:10Z" finished-at="2017-07-25T22:51:28Z">
+        <test-method status="PASS" signature="opeartion6(java.lang.String)[pri:6, instance:Moderator_Web_App.Network_Capturing@c038203]" name="opeartion6" duration-ms="60009" started-at="2017-08-31T11:05:55Z" finished-at="2017-08-31T11:06:55Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[moderator]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- opeartion6 -->
-        <test-method status="PASS" signature="opeartion7()[pri:7, instance:Moderator_Web_App.Network_Capturing@be64738]" name="opeartion7" duration-ms="94758" started-at="2017-07-25T22:51:28Z" finished-at="2017-07-25T22:53:03Z">
+        <test-method status="PASS" signature="opeartion7()[pri:7, instance:Moderator_Web_App.Network_Capturing@c038203]" name="opeartion7" duration-ms="86812" started-at="2017-08-31T11:06:55Z" finished-at="2017-08-31T11:08:22Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- opeartion7 -->
-        <test-method status="PASS" signature="shutdown()[pri:0, instance:Moderator_Web_App.Network_Capturing@be64738]" name="shutdown" is-config="true" duration-ms="3873" started-at="2017-07-25T22:53:03Z" finished-at="2017-07-25T22:53:07Z">
+        <test-method status="PASS" signature="opeartion8()[pri:8, instance:Moderator_Web_App.Network_Capturing@c038203]" name="opeartion8" duration-ms="9355" started-at="2017-08-31T11:08:22Z" finished-at="2017-08-31T11:08:31Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- opeartion8 -->
+        <test-method status="PASS" signature="shutdown()[pri:0, instance:Moderator_Web_App.Network_Capturing@c038203]" name="shutdown" is-config="true" duration-ms="8168" started-at="2017-08-31T11:08:31Z" finished-at="2017-08-31T11:08:39Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shutdown -->

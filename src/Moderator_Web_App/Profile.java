@@ -17,6 +17,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Profile {
 	public WebDriver driver;
+	boolean flag_for_profile_update = false;
+	boolean flag_for_paypal_update = false;
+	boolean flag_for_password_update = false;
 
 	public Profile(WebDriver driver1) {
 		driver = driver1;
@@ -26,6 +29,7 @@ public class Profile {
 
 		try 
 		{
+			
 			WebDriverWait wait = new WebDriverWait(driver, 50);
 			WebElement profile_page_link = wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath("/html/body/div/div/header/div[2]/nav/a[6]")));
@@ -35,12 +39,22 @@ public class Profile {
 			WebElement profile_full_name_field = wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.id("fullname")));
 			profile_full_name_field.sendKeys("12");;
-
+			
 			WebElement profile_update_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath("/html/body/div/div/main/div/div[2]/div[1]/div/div/input")));
 							
 			profile_update_button.click();
 			Thread.sleep(8000);
+			
+			try {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By
+						.xpath("/html/body/div/div/main/div/div[2]/div[1]/div/form/div")));
+//				driver.findElement(By.xpath("/html/body/div/div/main/div/div[2]/div[1]/div/form/div"));
+				flag_for_profile_update =true;
+				
+			} catch (Exception e) {
+
+			}
 			
 			WebElement paypal_first_name = wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.id("first_name")));
@@ -72,6 +86,16 @@ public class Profile {
 			paypal_update_button.click();
 			Thread.sleep(8000);
 			
+			try {
+				driver.findElement(By.xpath("/html/body/div/div/main/div/div[2]/div[2]/div/form/div"));
+				flag_for_paypal_update=true;
+				
+			} catch (Exception e) {
+
+			}
+			
+			
+			
 			WebElement update_password_old_pwd_field = wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.id("old_password")));
 			update_password_old_pwd_field.sendKeys("kiwikiwi");
@@ -87,29 +111,38 @@ public class Profile {
 			WebElement password_update_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath("/html/body/div/div/main/div/div[2]/div[3]/div/div/input")));
 			password_update_button.click();
+			Thread.sleep(5000);
 			
-//			try{
-//				//System.out.println("First attempt failed to update password");
-//				WebElement error_foe_incorrect_old_password = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-//						.xpath("/html/body/div/div/main/div/div[2]/div[3]/div/form/div")));
-//				update_password_old_pwd_field.clear();
-//				update_password_old_pwd_field.sendKeys("kiwikiwi");
-//				update_password_new_pwd_field.clear();
-//				update_password_new_pwd_field.sendKeys("kiwikiwi1");
-//				update_password_confirm_pwd_field.clear();
-//				update_password_confirm_pwd_field.sendKeys("kiwikiwi1");
-//				
-//				
-//			}
-//			catch(Exception e)
-//			{
-//				System.out.println("Password upadted successfully");
-//			}
+			try {
+				driver.findElement(By.xpath("/html/body/div/div/main/div/div[2]/div[3]/div/form/div"));
+				flag_for_password_update=true;
+				
+			} catch (Exception e) {
+
+			}
 			
-			//driver.navigate().refresh();
-			
-//			WebElement signout_link = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/header/div[2]/nav/button")));
-//			signout_link.click();
+			if(flag_for_profile_update == true && flag_for_paypal_update == true && flag_for_password_update == true)
+			{
+				Network_Capturing.mod_mail_msg += "<tr>" +
+						 "<td align='center'  color='white' bgcolor='#e5ede3'>"+Network_Capturing.var_for_report_counter+"</td>"
+						 + "<td align='left' color='white' bgcolor='#e5ede3'>" +
+						 "Verify if all details can be added and submitted successfully on Profile screen" + "</td>"
+						 + "<td align='center' color='white' bgcolor='#e5ede3'>" +
+						 "Pass" + "</td>";
+						 Network_Capturing.mod_mail_msg += "</tr>";
+						 Network_Capturing.var_for_report_counter++;
+			}
+			else
+			{
+				Network_Capturing.mod_mail_msg += "<tr>" +
+						 "<td align='center'  color='white' bgcolor='#e5ede3'>"+Network_Capturing.var_for_report_counter+"</td>"
+						 + "<td align='left' color='white' bgcolor='#e5ede3'>" +
+						 "Verify if all details can be added and submitted successfully on Profile screen" + "</td>"
+						 + "<td align='center' color='white' bgcolor='#FDE2DC'>" +
+						 "Fail" + "</td>";
+						 Network_Capturing.mod_mail_msg += "</tr>";
+						 Network_Capturing.var_for_report_counter++;
+			}
 			
 			System.out.println("=======================================================================================================================================================================================");
 			

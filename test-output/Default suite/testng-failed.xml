@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
-  <parameter name="web_app_type" value="customer"/>
+  <parameter name="web_app_type" value="moderator"/>
   <test name="operation1(failed)">
     <classes>
       <class name="Moderator_Web_App.Network_Capturing">
         <methods>
           <include name="shutdown"/>
           <include name="setup"/>
-          <include name="operation2"/>
+          <include name="opeartion7"/>
+          <include name="opeartion6"/>
         </methods>
       </class> <!-- Moderator_Web_App.Network_Capturing -->
     </classes>

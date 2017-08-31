@@ -33,6 +33,32 @@ public class Contact_Us {
 		contact_us_submit_button.click();
 		
 		Thread.sleep(10000);
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/main/div/div[2]/div/div/form/div")));
+			 Network_Capturing.mod_mail_msg += "<tr>" +
+					 "<td align='center'  color='white' bgcolor='#e5ede3'>"+Network_Capturing.var_for_report_counter+"</td>"
+					 + "<td align='left' color='white' bgcolor='#e5ede3'>" +
+					 "Verify if all details can be added and submitted successfully on contact us screen" + "</td>"
+					 + "<td align='center' color='white' bgcolor='#e5ede3'>" +
+					 "Pass" + "</td>";
+					 Network_Capturing.mod_mail_msg += "</tr>";
+					 Network_Capturing.var_for_report_counter++;
+			
+		}
+		catch(Exception e){
+			 Network_Capturing.mod_mail_msg += "<tr>" +
+					 "<td align='center'  color='white' bgcolor='#e5ede3'>"+Network_Capturing.var_for_report_counter+"</td>"
+					 + "<td align='left' color='white' bgcolor='#e5ede3'>" +
+					 "Verify if all details can be added and submitted successfully on contact us screen" + "</td>"
+					 + "<td align='center' color='white' bgcolor='#FDE2DC'>" +
+					 "Fail" + "</td>";
+					 Network_Capturing.mod_mail_msg += "</tr>";
+					 Network_Capturing.var_for_report_counter++;
+			
+		}
+		
+		Thread.sleep(10000);
 		}
 		catch(Exception e)
 		{

@@ -49,7 +49,9 @@ public class Network_Capturing {
 	//public HashMap<String, Integer> newmap = new HashMap<String, Integer>();
 	public static String msg1;
 	public static String cust_mail_msg;
+	public static String mod_mail_msg;
 	public static String global_variable;
+	public static int var_for_report_counter=1;
 	int count = 1;
 
 	@BeforeClass
@@ -71,7 +73,7 @@ public class Network_Capturing {
 		
 		
 		System.out.println("Port started:" + port);
-		msg1 = "Hi All,<br><br><h2 align='center'/>Web APPLICATION & API Status REPORT</h2><div><div align='center'></div><br>";
+		msg1 = "Hi All,<br><br><h2 align='center'/>Moderator API Status REPORT</h2><div><div align='center'></div><br>";
 		msg1 += "<br><h3 align=\"center\"><i>Test Execution Details </i></h3>"
 				+ "<table style=\"height:100%\" bordercolor='BLACK' border='1' cellpadding='7' cellspacing='0' align='center'>" + "<tr>"
 				+ "<th align='center' color='white' bgcolor='#F5DA81'>S.No.</th>"
@@ -81,8 +83,17 @@ public class Network_Capturing {
 				+ "<th align='center' color='white' bgcolor='#F5DA81'>STATUS CODE</th>"
 				+ "</tr>";
 		
-		cust_mail_msg = "Hi All,<br><br><h2 align='center'/>Customer Web APPLICATION AUTOMATION REPORT</h2><div><div align='center'></div><br>";
+		cust_mail_msg = "Hi All,<br><br><h2 align='center'/>Customer Web-APPLICATION & API Status REPORT</h2><div><div align='center'></div><br>";
 		cust_mail_msg += "<br><h3 align=\"center\"><i>Test Execution Details </i></h3>"
+				+ "<table style=\"height:100%\" bordercolor='BLACK' border='1' cellpadding='7' cellspacing='0' align='center'>" + "<tr>"
+				+ "<th align='center' color='white' bgcolor='#F5DA81'>S.No.</th>"
+				+ "<th align='center' color='white' bgcolor='#F5DA81'>Operation Performed</th>"
+				+ "<th align='center' color='white' bgcolor='#F5DA81'>STATUS</th>"
+				+ "</tr>";
+		
+		
+		mod_mail_msg = "<br><br><h2 align='center'/>Moderator UI Automation REPORT</h2><div><div align='center'></div><br>";
+		mod_mail_msg += "<br><h3 align=\"center\"><i>Test Execution Details </i></h3>"
 				+ "<table style=\"height:100%\" bordercolor='BLACK' border='1' cellpadding='7' cellspacing='0' align='center'>" + "<tr>"
 				+ "<th align='center' color='white' bgcolor='#F5DA81'>S.No.</th>"
 				+ "<th align='center' color='white' bgcolor='#F5DA81'>Operation Performed</th>"
@@ -121,6 +132,9 @@ public class Network_Capturing {
 			server.newHar("experiment1.har");
 			operation_going_to_performed = "Signup / Register";
 			
+//			Login go_login = new Login(driver);
+//			go_login.login();
+			
 			Customer_Web_App.Customer_Signup go_signup = new Customer_Web_App.Customer_Signup(driver);
 			go_signup.signup();
 			
@@ -152,7 +166,7 @@ public class Network_Capturing {
 			
 			msg1 += "<tr>" + "<td align='center' rowspan = 1 color='white' bgcolor='#e5ede3'>"+ count + "</td>"
 					+ "<td align='center' rowspan = 1 color='white' bgcolor='#e5ede3'>"+ "Practice Task Completion" + "</td>" + "<td align='center' color='white' bgcolor='#e5ede3'>" + "POST" + "</td>"
-					+ "<td align='center' color='white' bgcolor='#e5ede3'>" + "https://hivemicro.com/api/jobs" + "</td>"
+					+ "<td align='left' color='white' bgcolor='#e5ede3'>" + "https://hivemicro.com/api/jobs" + "</td>"
 					+ "<td align='center' color='white' bgcolor='#e5ede3'>" + "200" + "</td>"
 					+ "</tr>";
 			count++;
@@ -216,7 +230,7 @@ public class Network_Capturing {
 		operation_going_to_performed = "Stats";
 		Stats stats_object = new Stats(driver);
 		stats_object.statsStic();
-		System.out.println("Going to read HAR file for Profile");
+		System.out.println("Going to read HAR file for Stats");
 
 		Har har = server.getHar();
 		Thread.sleep(5000);
@@ -262,9 +276,10 @@ public class Network_Capturing {
 	
 	
 	
-	@Test(priority = 6)
-	public void opeartion6() throws InterruptedException, IOException {
-
+	@Test(priority = 6) //6
+	@Parameters({"web_app_type"})
+	public void opeartion6(String web_app_type) throws InterruptedException, IOException {
+		global_variable = web_app_type;
 		if(global_variable.equalsIgnoreCase("moderator")){
 		server.newHar("experiment7.har");
 		operation_going_to_performed = "Login";
@@ -285,7 +300,7 @@ public class Network_Capturing {
 		}
 	}
 	
-	@Test(priority = 7)
+	@Test(priority = 7) //7
 	public void opeartion7() throws InterruptedException, IOException
 	{
 		if(global_variable.equalsIgnoreCase("moderator")){
@@ -295,11 +310,11 @@ public class Network_Capturing {
 			moderate_task_object.moderatingTask();
 			
 			msg1 += "<tr>" + "<td align='center' rowspan = 1 color='white' bgcolor='#e5ede3'>"+ count + "</td>"
-					+ "<td align='center' rowspan = 1 color='white' bgcolor='#e5ede3'>"+ "Practice Task Completion" + "</td>" + "<td align='center' color='white' bgcolor='#e5ede3'>" + "POST" + "</td>"
-					+ "<td align='center' color='white' bgcolor='#e5ede3'>" + "https://hivemicro.com/api/jobs" + "</td>"
+					+ "<td align='center' rowspan = 1 color='white' bgcolor='#e5ede3'>"+ "Real Task Moderation" + "</td>" + "<td align='center' color='white' bgcolor='#e5ede3'>" + "POST" + "</td>"
+					+ "<td align='left' color='white' bgcolor='#e5ede3'>" + "https://hivemicro.com/api/moderation/feed/" + "</td>"
 					+ "<td align='center' color='white' bgcolor='#e5ede3'>" + "200" + "</td>"
 					+ "</tr>";
-			
+			count++;
 			System.out.println("Going to read HAR file for Profile");
 
 //			Har har = server.getHar();
@@ -307,6 +322,29 @@ public class Network_Capturing {
 //			
 //			har.writeTo(harFile);
 //			ReadHarFile("experiment8.har", operation_going_to_performed);
+		}
+		else
+		{
+			
+		}
+	}
+	
+	@Test(priority = 8) //8
+	public void opeartion8() throws InterruptedException, IOException {
+		if(global_variable.equalsIgnoreCase("moderator")){
+		server.newHar("experiment9.har");
+		operation_going_to_performed = "Leaderboard";
+		
+		Leaderboard leader = new Leaderboard(driver);
+		leader.clickLeaderboardLink();
+		
+		System.out.println("Going to read HAR file for Profile");
+
+		Har har = server.getHar();
+		Thread.sleep(5000);
+		File harFile = new File("/Users/viveksingh/Documents/Animals/experiment9.har");
+		har.writeTo(harFile);
+		ReadHarFile("experiment9.har", operation_going_to_performed);
 		}
 		else
 		{
@@ -321,7 +359,9 @@ public class Network_Capturing {
 		server.stop();
 		Mailing_Report mail_report = new Mailing_Report();
 		msg1 += "</table>" + "</div>";
-		//System.out.println(msg1);
+		System.out.println(msg1);
+		System.out.println(mod_mail_msg);
+		System.out.println("==========================================================================================================");
 		mail_report.sendReport(msg1);
 	}
 
@@ -355,7 +395,8 @@ public class Network_Capturing {
 						|| entry.getRequest().getUrl().contains("/payment")
 						|| entry.getRequest().getUrl().contains("/session")
 						|| entry.getRequest().getUrl().contains("/feed")
-						|| entry.getRequest().getUrl().contains("/timeseries")) {
+						|| entry.getRequest().getUrl().contains("/timeseries")
+						|| entry.getRequest().getUrl().contains("/leaderboard")) {
 					System.out.println("entry: " + entryIndex);
 					System.out.println("request url: " + entry.getRequest().getUrl());
 					System.out.println("Request Method: " + entry.getRequest().getMethod());
@@ -403,7 +444,7 @@ public class Network_Capturing {
 				System.out.println(method[p][0]);System.out.println(method[p][1]);System.out.println(method[p][2]);
 				
 				msg1  +=  "<td align='center' color='white' bgcolor='#e5ede3'>" + method[p][0] + "</td>"
-						+ "<td align='center' color='white' bgcolor='#e5ede3'>" + method[p][1] + "</td>"
+						+ "<td align='left' color='white' bgcolor='#e5ede3'>" + method[p][1] + "</td>"
 						+ "<td align='center' color='white' bgcolor='#e5ede3'>" + method[p][2] + "</td>"
 						+ "</tr>";
 				
@@ -411,49 +452,6 @@ public class Network_Capturing {
 			}
 			count++;
 				
-			
-//			if (newmap.size() > 1) {																			
-//				msg1 += "<tr>" + "<td align='center' rowspan =\""+newmap.size()+"\" color='white' bgcolor='#e5ede3'>"+ count + "</td>"
-//						+ "<td align='center' rowspan =\""+newmap.size()+"\" color='white' bgcolor='#e5ede3'>"+ operation_performed + "</td>";
-//				while (it.hasNext()) {
-//					HashMap.Entry pair = (HashMap.Entry) it.next();
-//					if( temp == 1 )
-//					{
-//					msg1  +=  "<td align='center' color='white' bgcolor='#e5ede3'>" + method[local_count] + "</td>"
-//							+ "<td align='center' color='white' bgcolor='#e5ede3'>" + pair.getKey() + "</td>"
-//							+ "<td align='center' color='white' bgcolor='#e5ede3'>" + pair.getValue() + "</td>"
-//							+ "</tr>";
-//					temp++;
-//					local_count++;
-//					}
-//					else
-//					{				
-//							msg1  +=  "<tr>" + "<td align='center' color='white' bgcolor='#e5ede3'>" + method[local_count] + "</td>"
-//									+"<td align='center' color='white' bgcolor='#e5ede3'>" + pair.getKey() + "</td>"
-//									+ "<td align='center' color='white' bgcolor='#e5ede3'>" + pair.getValue() + "</td>"
-//									+ "</tr>";
-//							temp++;
-//							local_count++;					
-//					}				
-//				}
-//				count++;
-//			}
-//			else {
-//				HashMap.Entry pair = (HashMap.Entry) it.next();
-//				msg1 += "<tr>" + "<td align='center' color='white' bgcolor='#e5ede3'>" + count + "</td>"
-//						+ "<td align='center' color='white' bgcolor='#e5ede3'>" + operation_performed + "</td>"
-//						+ "<td align='center' color='white' bgcolor='#e5ede3'>" + method[local_count] + "</td>"
-//						+ "<td align='center' color='white' bgcolor='#e5ede3'>" + pair.getKey() + "</td>"
-//						+ "<td align='center' color='white' bgcolor='#e5ede3'>" + pair.getValue() + "</td>" 
-//						+ "</tr>";
-//				count++;
-//				local_count++;
-//						
-//			}
-			
-			
-			
-			
 			
 			System.out.println(msg1);
 			long loadTimeSpan = loadTime - startTime;
@@ -463,14 +461,37 @@ public class Network_Capturing {
 			System.out.println("Web Load Time: " + webLoadTimeInSeconds);
 
 		} catch (JsonParseException e) {
+			
+			msg1 += "<tr>" + "<td align='center' rowspan = \"1\" color='white' bgcolor='#e5ede3'>"+ count + "</td>"
+					+ "<td align='center' rowspan = \"1\" color='white' bgcolor='#e5ede3'>"+ operation_performed + "</td>";
+			msg1  +=  "<td align='center' color='white' bgcolor='#e5ede3'>" + "N/A" + "</td>"
+					+ "<td align='left' color='white' bgcolor='#e5ede3'>" + "Unrecognized field '_error' in response element" + "</td>"
+					+ "<td align='center' color='white' bgcolor='#e5ede3'>" + "N/A" + "</td>"
+					+ "</tr>";
+			count++;
+			
 			e.printStackTrace();
 			System.out.println("Parsing error during test");
 		} catch (IOException e) {
+			msg1 += "<tr>" + "<td align='center' rowspan = \"1\" color='white' bgcolor='#e5ede3'>"+ count + "</td>"
+					+ "<td align='center' rowspan = \"1\" color='white' bgcolor='#e5ede3'>"+ operation_performed + "</td>";
+			msg1  +=  "<td align='center' color='white' bgcolor='#e5ede3'>" + "N/A" + "</td>"
+					+ "<td align='left' color='white' bgcolor='#e5ede3'>" + "Unrecognized field '_error' in response element" + "</td>"
+					+ "<td align='center' color='white' bgcolor='#e5ede3'>" + "N/A" + "</td>"
+					+ "</tr>";
+			count++;
 			e.printStackTrace();
 			System.out.println("IO exception during test");
 		}
 		catch(Exception e)
 		{
+			msg1 += "<tr>" + "<td align='center' rowspan = \"1\" color='white' bgcolor='#FDE2DC'>"+ count + "</td>"
+					+ "<td align='center' rowspan = \"1\" color='white' bgcolor='#FDE2DC'>"+ operation_performed + "</td>";
+			msg1  +=  "<td align='center' color='white' bgcolor='#e5ede3'>" + "N/A" + "</td>"
+					+ "<td align='left' color='white' bgcolor='#e5ede3'>" + "Unrecognized field '_error' in response element" + "</td>"
+					+ "<td align='center' color='white' bgcolor='#e5ede3'>" + "N/A" + "</td>"
+					+ "</tr>";
+			count++;
 			e.printStackTrace();
 		}
 	}

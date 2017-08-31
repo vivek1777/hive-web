@@ -67,10 +67,10 @@ public class Add_Project {
 				}
 				
 				
-				WebElement custom_div = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-						.xpath(prop.getProperty("custom_div_button"))));
+				WebElement data_labeling = wait.until(ExpectedConditions.visibilityOfElementLocated(By
+						.xpath(prop.getProperty("data_labeling_section"))));
 				Actions act1 = new Actions(driver);
-				act1.moveToElement(custom_div).click().perform();
+				act1.moveToElement(data_labeling).click().perform();
 
 
 				WebElement title = wait

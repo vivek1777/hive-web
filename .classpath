@@ -20,5 +20,6 @@
 	<classpathentry kind="lib" path="lib/testng.jar"/>
 	<classpathentry kind="lib" path="lib/javax.activation.jar"/>
 	<classpathentry kind="lib" path="lib/mail-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/jcommander-1.72.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

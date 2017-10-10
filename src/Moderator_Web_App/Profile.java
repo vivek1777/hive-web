@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -43,7 +45,9 @@ public class Profile {
 			WebElement profile_update_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath("/html/body/div/div/main/div/div[2]/div[1]/div/div/input")));
 							
-			profile_update_button.click();
+			Actions action1 = new Actions(driver);
+			action1.moveToElement(profile_update_button).click().perform();
+			//profile_update_button.click();
 			Thread.sleep(8000);
 			
 			try {
@@ -66,10 +70,10 @@ public class Profile {
 			
 			Thread.sleep(5000);
 			try{
-			WebElement paypal_email = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div/div/main/div/div[2]/div[2]/div/form/fieldset[3]/input")));
+			WebElement paypal_email = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div/div/main/div/div[2]/div[2]/div/div/input")));
 																									
 				paypal_email.sendKeys("vineet1777@yahoo.com");
-			System.out.println("Entered  email");
+				System.out.println("Entered  email");
 			}
 			catch(Exception e)
 			{
@@ -83,7 +87,8 @@ public class Profile {
 			
 			WebElement paypal_update_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath("/html/body/div/div/main/div/div[2]/div[2]/div/div/input")));
-			paypal_update_button.click();
+			action1.moveToElement(paypal_update_button).click().perform();
+			//paypal_update_button.click();
 			Thread.sleep(8000);
 			
 			try {

@@ -113,7 +113,7 @@ public WebDriver driver;
 					}
 					else
 					{
-						Network_Capturing.mod_mail_msg += "<tr>" +
+								Network_Capturing.mod_mail_msg += "<tr>" +
 								 "<td align='center'  color='white' bgcolor='#e5ede3'>"+Network_Capturing.var_for_report_counter+"</td>"
 								 + "<td align='left' color='white' bgcolor='#e5ede3'>" +
 								 "Verify if a active job is toggle-disabled then feed does not contains task from disabled job." + "</td>"
@@ -134,7 +134,7 @@ public WebDriver driver;
 				System.out.println("Closed the no more task pop-up for invoked for reporting purpose");
 				
 				
-				Thread.sleep(10000);
+				//Thread.sleep(10000);
 				System.out.println("=======================================================================================================================================");
 				System.out.println("Now going to enabled active project");
 				// New Logic
@@ -145,7 +145,7 @@ public WebDriver driver;
 			
 						System.out.println("Found Project Listing Table");
 						while (true) {
-																													
+															// going to find row which contains NSFW active project														
 							WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/main/div/div[2]/div/table/tbody/tr[" + counter + "]/td[1]")));
 							
 							if (element.getText().equalsIgnoreCase("NSFW Images")) {
@@ -179,7 +179,7 @@ public WebDriver driver;
 				WebElement first_start_working_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("_3VKG6gpwuvcgvDd94G4m_U")));
 				first_start_working_button.click(); // click on start working button
 				
-				Thread.sleep(3000);
+				//Thread.sleep(3000);
 				try {
 					driver.findElement(By.className("_1xMA1J_25JShnn1OrgerRz")).click();
 					
@@ -207,19 +207,19 @@ public WebDriver driver;
 				int attempt_counter =0;
 				int moderation_counter=1;
 				
-			while (attempt_counter <= 10) {
+			while (true) {
 				try {
-					WebDriverWait wait5 = new WebDriverWait(driver, 10);
+					WebDriverWait wait5 = new WebDriverWait(driver, 5);
 					WebElement cross_button_no_more_popup = wait5.until(ExpectedConditions
 							.visibilityOfElementLocated(By
 									.xpath("html/body/div[2]/div/div[2]/div/div/div[1]/button/span")));
 					cross_button_no_more_popup.click();
-					Thread.sleep(3000);
+					//Thread.sleep(3000);
 					WebDriverWait wait8 = new WebDriverWait(driver, 7);
 					WebElement stsrt_working_button = wait8.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/main/div/div[2]/div/div/div/div/a")));
 					Actions act = new Actions(driver);
 					act.moveToElement(stsrt_working_button).click().perform();
-					Thread.sleep(2000);
+					Thread.sleep(1000);
 					
 					driver.findElement(By.className("_1xMA1J_25JShnn1OrgerRz")).click();
 					
@@ -227,13 +227,13 @@ public WebDriver driver;
 				} catch (Exception e) {
 
 					try {
-						WebDriverWait wait6 = new WebDriverWait(driver, 7);
+						WebDriverWait wait6 = new WebDriverWait(driver, 3);
 						WebElement category_button = wait6.until(ExpectedConditions
 								.visibilityOfElementLocated(By
 										.xpath("/html/body/div/div/main/div/div[2]/div/div/div/div[2]/div[2]/div[3]/div[1]/div/div/div/button[2]")));
 						category_button.click();
 						moderation_counter++;
-						if(moderation_counter == 5)
+						if(moderation_counter == 5 || attempt_counter >= 10)
 						{
 							break;
 						}

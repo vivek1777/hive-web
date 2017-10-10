@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -38,7 +39,7 @@ public class Signup {
 		driver.get("https://hivemicro.com");
 		WebElement full_name_text_field;
 		Thread.sleep(10000);
-		WebDriverWait wait = new WebDriverWait(driver, 600);
+		WebDriverWait wait = new WebDriverWait(driver, 60);
 		WebElement signup_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/header/div[2]/nav/div/a")));
 		signup_button.click();
 		
@@ -68,14 +69,21 @@ public class Signup {
 		confirm_password.sendKeys("kiwikiwi");
 		
 		try{
-		driver.findElement(By.id("legal-verification")).click();
-		driver.findElement(By.id("age-verification")).click();
+			WebElement ToS = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/main/div/div[2]/div/div[1]/label/p")));
+			Actions action = new Actions(driver);
+			action.moveToElement(ToS).click().perform();
+			Thread.sleep(2000);
+			WebElement agree_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div[2]/div[3]/div/button/span[1]")));
+			Actions action1 = new Actions(driver);
+			action1.moveToElement(agree_button).click().perform();
+			Thread.sleep(2000);
+		
 		}catch(Exception e)
 		{
 			System.out.println("legal-verificatio or age-verification is not clickable");
 		}
 		
-		WebElement signup_submit_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/main/div/div[2]/div/div[3]/input")));
+		WebElement signup_submit_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/main/div/div[2]/div/div[2]/input")));
 		signup_submit_button.click();
 		Thread.sleep(5000);
 		
@@ -101,14 +109,14 @@ public class Signup {
 		
 		while(true)
 		{
-			try{
-			WebElement skip_paypal_detail_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Skip")));
-			skip_paypal_detail_button.click();
-			break;
-			}catch(Exception e)
-			{
-				System.out.println("Skip button of payemnt page after signup is not found");
-			}
+				try {
+					WebElement skip_paypal_detail_button = wait.until(ExpectedConditions.visibilityOfElementLocated(By
+							.linkText("Skip")));
+					skip_paypal_detail_button.click();
+					break;
+				} catch (Exception e) {
+					System.out.println("Skip button of payemnt page after signup is not found");
+				}
 		}
 		
 

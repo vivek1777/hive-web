@@ -29,7 +29,9 @@ public class Mailing_Report {
 		
 		String subject = "Hive Automation Report";
 		boolean sessionDebug = false;
-
+		String host = "smtp.gmail.com";
+		String user = "vivek.singh@kiwi.qa";
+		
 		Properties props = System.getProperties();
 		props.put("mail.smtp.starttls.required", "true");
 		props.put("mail.smtp.starttls.enable", "true");
